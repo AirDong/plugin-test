@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aidong.dal.mapper.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.aidong.dal.entity.OrderInfo">
+    <id column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
+    <result column="ORDER_DESC" jdbcType="VARCHAR" property="orderDesc" />
+    <result column="ORDER_DATE" jdbcType="VARCHAR" property="orderDate" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CUSTOMER" jdbcType="VARCHAR" property="customer" />
+    <result column="CUSTOMER_EMAIL" jdbcType="VARCHAR" property="customerEmail" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_order_info
+    where ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.aidong.dal.entity.OrderInfo">
+    insert into t_order_info (ORDER_NO, ORDER_DESC, ORDER_DATE, 
+      CREATE_USER, CREATE_TIME, CUSTOMER, 
+      CUSTOMER_EMAIL)
+    values (#{orderNo,jdbcType=VARCHAR}, #{orderDesc,jdbcType=VARCHAR}, #{orderDate,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{customer,jdbcType=VARCHAR}, 
+      #{customerEmail,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.aidong.dal.entity.OrderInfo">
+    update t_order_info
+    set ORDER_DESC = #{orderDesc,jdbcType=VARCHAR},
+      ORDER_DATE = #{orderDate,jdbcType=VARCHAR},
+      CREATE_USER = #{createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CUSTOMER = #{customer,jdbcType=VARCHAR},
+      CUSTOMER_EMAIL = #{customerEmail,jdbcType=VARCHAR}
+    where ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select ORDER_NO, ORDER_DESC, ORDER_DATE, CREATE_USER, CREATE_TIME, CUSTOMER, CUSTOMER_EMAIL
+    from t_order_info
+    where ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ORDER_NO, ORDER_DESC, ORDER_DATE, CREATE_USER, CREATE_TIME, CUSTOMER, CUSTOMER_EMAIL
+    from t_order_info
+  </select>
+</mapper>
